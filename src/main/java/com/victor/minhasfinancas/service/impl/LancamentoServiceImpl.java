@@ -3,6 +3,7 @@ package com.victor.minhasfinancas.service.impl;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import com.victor.minhasfinancas.exception.RegraNegocioException;
 import com.victor.minhasfinancas.model.entity.Lancamento;
@@ -94,6 +95,14 @@ public class LancamentoServiceImpl implements LancamentoService {
             throw new RegraNegocioException("Informe um tipo de lancamento");
         }
 
+    }
+
+    @Override
+    public Optional<Lancamento> obterPorId(Long id) {
+
+        Optional<Lancamento> idLancamento = repository.findById(id);
+
+        return idLancamento;
     }
 
 }
