@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import com.victor.minhasfinancas.api.dto.AtualizaStatusDTO;
 import com.victor.minhasfinancas.api.dto.LancamentoDTO;
 import com.victor.minhasfinancas.exception.ErroAutenticacao;
 import com.victor.minhasfinancas.exception.RegraNegocioException;
@@ -43,7 +44,7 @@ public class LancamentoResource {
         try {
             Lancamento entidade = converter(dto);
             entidade = service.salvar(entidade);
-            return new ResponseEntity<>(entidade,HttpStatus.CREATED);
+            return new ResponseEntity<>(entidade, HttpStatus.CREATED);
         } catch (RegraNegocioException e) {
 
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -67,6 +68,33 @@ public class LancamentoResource {
             }
 
         }).orElseGet(() -> new ResponseEntity("Lancamento nçao encontrado na base de dados", HttpStatus.BAD_REQUEST));
+
+    }
+
+    @PutMapping("{id}/atualiza-status")
+    public ResponseEntity atualizarStatus(@PathVariable("id") Long id, @RequestBody AtualizaStatusDTO dto) {
+
+        return service.obterPorId(id).map(entidade -> {
+
+            StatusLancamento statusSelecionado = StatusLancamento.valueOf(dto.getStatus());
+
+            if (statusSelecionado == null) {
+                return ResponseEntity.badRequest()
+                        .body("Não foi possivel atualizar o status do lançamento , envie um status valido .");
+            }
+
+            try {
+                entidade.setStatus(statusSelecionado);
+                service.atualizar(entidade);
+                return ResponseEntity.ok(entidade);
+
+            } catch (RegraNegocioException e) {
+
+                return ResponseEntity.badRequest().body(e.getMessage());
+
+            }
+
+        }).orElseGet(() -> new ResponseEntity("Lancamento não encontrado na base de Dados.", HttpStatus.BAD_REQUEST));
 
     }
 
