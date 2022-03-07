@@ -8,6 +8,7 @@ import java.util.Optional;
 import com.victor.minhasfinancas.exception.RegraNegocioException;
 import com.victor.minhasfinancas.model.entity.Lancamento;
 import com.victor.minhasfinancas.model.enums.StatusLancamento;
+import com.victor.minhasfinancas.model.enums.TipoLancamento;
 import com.victor.minhasfinancas.model.repository.LancamentoRepository;
 import com.victor.minhasfinancas.service.LancamentoService;
 
@@ -103,6 +104,24 @@ public class LancamentoServiceImpl implements LancamentoService {
         Optional<Lancamento> idLancamento = repository.findById(id);
 
         return idLancamento;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public BigDecimal obterSaldoPorUsuario(Long id) {
+
+        BigDecimal receitas = repository.obterSaldoPorTipoLancamentoEUsuario(id, TipoLancamento.RECEITA);
+        BigDecimal despesas = repository.obterSaldoPorTipoLancamentoEUsuario(id, TipoLancamento.DESPESA);
+
+        if (receitas == null) {
+            receitas = BigDecimal.ZERO;
+        }
+
+        if (despesas == null) {
+            despesas = BigDecimal.ZERO;
+        }
+
+        return receitas.subtract(despesas);
     }
 
 }
