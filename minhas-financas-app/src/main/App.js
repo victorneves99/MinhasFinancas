@@ -4,12 +4,17 @@ import Login from "../views/login";
 import "../custom.css";
 import Rotas from "./rotas";
 import CadastroUsuario from "../views/cadastroUsuario";
+import NavBar from "../components/NavBar";
+
 export default class App extends Component {
   render() {
     return (
-      <div>
-        <Rotas />
-      </div>
+      <>
+        <NavBar />
+        <div className="container">
+          <Rotas />
+        </div>
+      </>
     );
   }
 }
