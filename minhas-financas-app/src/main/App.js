@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "bootswatch/dist/lux/bootstrap.css";
-import Login from "../views/login";
+import Login from "../views/Login";
 import "../custom.css";
-import Rotas from "./rotas";
-import CadastroUsuario from "../views/cadastroUsuario";
+import Rotas from "./Rotas";
+import CadastroUsuario from "../views/CadastroUsuario";
 import NavBar from "../components/NavBar";
 
 export default class App extends Component {
