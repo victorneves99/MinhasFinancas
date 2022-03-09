@@ -1,6 +1,8 @@
 package com.victor.minhasfinancas.config;
 
+import com.victor.minhasfinancas.model.entity.Lancamento;
 import com.victor.minhasfinancas.model.entity.Usuario;
+import com.victor.minhasfinancas.model.repository.LancamentoRepository;
 import com.victor.minhasfinancas.model.repository.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ public class CarregaBaseDados {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private LancamentoRepository lancamentoRepository;
 
     @Bean
     CommandLineRunner executar() {
