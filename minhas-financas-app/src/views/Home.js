@@ -6,8 +6,13 @@ export class Home extends Component {
   };
 
   componentDidMount() {
+    const usuarioLogadoString = localStorage.getItem("_usuario_logado");
+    const usuarioLogado = JSON.parse(usuarioLogadoString);
+
+    console.log(usuarioLogado);
+
     axios
-      .get("http://localhost:8080/api/usuario/1/saldo")
+      .get(`http://localhost:8080/api/usuario/${usuarioLogado.id}/saldo`)
       .then((response) => {
         this.setState({ saldo: response.data });
       })
