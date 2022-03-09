@@ -44,6 +44,7 @@ export default class login extends Component {
                             placeholder="Password"
                           />
                         </FormGroup>
+                        <br />
                         <button onClick={this.entrar} className="btn btn-success">
                           Entrar
                         </button>
