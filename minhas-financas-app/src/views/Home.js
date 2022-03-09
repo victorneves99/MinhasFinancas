@@ -1,9 +1,20 @@
+import axios from "axios";
 import React, { Component } from "react";
-
 export class Home extends Component {
   state = {
     saldo: 0,
   };
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:8080/api/usuario/1/saldo")
+      .then((response) => {
+        this.setState({ saldo: response.data });
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
 
   render() {
     return (

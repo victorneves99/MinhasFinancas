@@ -66,4 +66,26 @@ public class Lancamento {
     @Enumerated(value = EnumType.STRING)
     private StatusLancamento status;
 
+    public Lancamento(Integer mes, Integer ano, String descricao, Usuario usuario, BigDecimal valor,
+            TipoLancamento tipo) {
+        this.mes = mes;
+        this.ano = ano;
+        this.descricao = descricao;
+        this.usuario = usuario;
+        this.valor = valor;
+        this.tipo = tipo;
+
+    }
+
+    public Lancamento(Integer mes, Integer ano, String descricao, Usuario usuario, BigDecimal valor,
+            TipoLancamento tipo, StatusLancamento status) {
+        this.mes = mes;
+        this.ano = ano;
+        this.descricao = descricao;
+        this.usuario = usuario;
+        this.valor = valor;
+        this.tipo = tipo;
+        this.status = status;
+    }
+
 }
