@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import Card from "../components/Card";
-import FormGroup from "../components/Form-Group";
-import SelectMenu from "../components/SelectMenu";
-
+import Card from "../../components/Card";
+import FormGroup from "../../components/Form-Group";
+import SelectMenu from "../../components/SelectMenu";
+import LancamentosLabel from "./LancamentosLabel";
 class Consulta_Lancamentos extends Component {
   render() {
     const meses = [
@@ -67,6 +67,8 @@ class Consulta_Lancamentos extends Component {
       { label: "Receita", value: "RECEITA" },
     ];
 
+    const lancamentos = [{ id: 1, descricao: "Salario", valor: 5000, mes: 1, tipo: "Receita", status: "Efetivado" }];
+
     return (
       <div>
         <Card title="Buscar Lancamentos">
@@ -96,6 +98,21 @@ class Consulta_Lancamentos extends Component {
                   <br />
                   <SelectMenu lista={tipos} className="form-control" />
                 </FormGroup>
+                <br />
+                <button type="button" className="btn btn-success">
+                  Buscar
+                </button>
+                <button type="button" className="btn btn-danger">
+                  Cadastrar
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <br />
+              <div className="bs-component">
+                <LancamentosLabel lancamentos={lancamentos} />
               </div>
             </div>
           </div>
