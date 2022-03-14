@@ -18,7 +18,43 @@ class CadastroUsuario extends Component {
     this.service = new UsuarioService();
   }
 
+  validar() {
+    const msg = [];
+
+    if (!this.state.nome) {
+      msg.push("O campo nome é obrigatorio.");
+    }
+
+    if (!this.state.email) {
+      msg.push("O campo Email é obrigatorio.");
+    } else if (!this.state.email.match(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]/)) {
+      msg.push("Informe um Email valido!");
+    }
+
+    if (!this.state.senhaRepeticao) {
+      msg.push("Digite a senha de validação!");
+    } else if (this.state.senha !== this.state.senhaRepeticao) {
+      msg.push("As senhas devem ser iguais!");
+    }
+
+    if (!this.state.senha || this.state.senha === "") {
+      msg.push("Digite a senha!");
+    }
+
+    return msg;
+  }
+
   cadastrar = () => {
+    const msgs = this.validar();
+
+    if (msgs && msgs.length > 0) {
+      msgs.forEach((msg, index) => {
+        mostrarErro(msg);
+      });
+
+      return false;
+    }
+
     const usuario = {
       nome: this.state.nome,
       email: this.state.email,
