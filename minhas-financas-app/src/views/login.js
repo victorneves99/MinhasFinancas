@@ -3,6 +3,7 @@ import Card from "../components/Card";
 import FormGroup from "../components/Form-Group";
 import { withRouter } from "react-router-dom";
 import UsuarioService from "../app/services/usuarioService";
+import LocalStorageService from "../app/services/localstorageService";
 class Login extends Component {
   state = {
     email: "",
@@ -22,7 +23,7 @@ class Login extends Component {
         senha: this.state.senha,
       })
       .then((response) => {
-        localStorage.setItem("_usuario_logado", JSON.stringify(response.data));
+        LocalStorageService.additem("_usuario_logado", response.data);
         this.props.history.push("/home");
       })
       .catch((erro) => {
