@@ -5,6 +5,8 @@ import "../custom.css";
 import Rotas from "./Rotas";
 import CadastroUsuario from "../views/CadastroUsuario";
 import NavBar from "../components/NavBar";
+import "toastr/build/toastr.css";
+import "toastr/build/toastr.min.js";
 
 export default class App extends Component {
   render() {
