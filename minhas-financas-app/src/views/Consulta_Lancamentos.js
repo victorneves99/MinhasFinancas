@@ -6,7 +6,7 @@ import SelectMenu from "../components/SelectMenu";
 
 class Consulta_Lancamentos extends Component {
   render() {
-    const lista = [
+    const meses = [
       {
         label: "Selecione. . .",
         value: "",
@@ -56,18 +56,26 @@ class Consulta_Lancamentos extends Component {
         value: 11,
       },
       {
-        label: "Dezembor",
+        label: "Dezembro",
         value: 12,
       },
     ];
 
+    const tipos = [
+      { label: "Selecione . . .", value: "" },
+      { label: "Despesa", value: "DESPESA" },
+      { label: "Receita", value: "RECEITA" },
+    ];
+
     return (
       <div>
-        <Card title="Busca Lancamentos">
+        <Card title="Buscar Lancamentos">
           <div className="row">
             <div className="col-md-6">
               <div className="bs-component">
                 <FormGroup label="Ano: *" htmlFor="inputAno">
+                  <br />
+                  <br />
                   <input
                     type="text"
                     className="form-control"
@@ -76,8 +84,17 @@ class Consulta_Lancamentos extends Component {
                     placeholder="Digite o Ano"
                   />
                 </FormGroup>
-                <FormGroup label="Mes: *" htmlFor="inputMes">
-                  <SelectMenu lista={lista} className="form-control" />
+                <br />
+                <FormGroup label="Mes :" htmlFor="inputMes">
+                  <br />
+                  <br />
+                  <SelectMenu lista={meses} className="form-control" />
+                </FormGroup>
+                <br />
+                <FormGroup label="Tipo :" htmlFor="inputTipo">
+                  <br />
+                  <br />
+                  <SelectMenu lista={tipos} className="form-control" />
                 </FormGroup>
               </div>
             </div>
