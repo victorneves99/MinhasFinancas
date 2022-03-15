@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import NavBarItem from "./NavBarItem";
 
@@ -6,7 +7,7 @@ export default function NavBar() {
     <div>
       <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
         <div className="container">
-          <a href="https://bootswatch.com/" className="navbar-brand">
+          <a href="#" className="navbar-brand">
             Minhas Finanças
           </a>
           <button
