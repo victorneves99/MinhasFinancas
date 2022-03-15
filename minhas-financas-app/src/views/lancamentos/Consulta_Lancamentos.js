@@ -21,8 +21,27 @@ class Consulta_Lancamentos extends Component {
     this.service = new LancamentoService();
   }
 
+  editar = (id) => {};
+
+  deletar = (lancamento) => {
+    console.log("deletando");
+
+    this.service
+      .deletar(lancamento.id)
+      .then((resposta) => {
+        const lancamentos = this.state.lancamentos;
+        const index = lancamentos.indexOf(lancamento);
+        lancamentos.splice(index, 1);
+        this.setState(lancamentos);
+        messages.mostrarSucesso("LAncamento deletado com sucesso!");
+      })
+      .catch((e) => {
+        messages.mostrarErro("Ocorreu um erro ao deletar o Lançamento!");
+      });
+  };
+
   buscar = () => {
-    if (!this.state.ano || !this.state.descricao) {
+    if (!this.state.ano) {
       messages.mostrarErro(`O campo ano precisa estar preenchido!`);
       return false;
     }
@@ -119,7 +138,11 @@ class Consulta_Lancamentos extends Component {
             <div className="col-md-12">
               <br />
               <div className="bs-component">
-                <LancamentosLabel lancamentos={this.state.lancamentos} />
+                <LancamentosLabel
+                  lancamentos={this.state.lancamentos}
+                  deleteAction={this.deletar}
+                  editarAction={this.editar}
+                />
               </div>
             </div>
           </div>
