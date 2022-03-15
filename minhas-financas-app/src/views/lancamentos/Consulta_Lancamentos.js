@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import * as messages from "../../components/Toastr";
 import LancamentoService from "../../app/services/lancamentoService";
 import LocalStorageService from "../../app/services/localstorageService";
 import Card from "../../components/Card";
@@ -11,6 +12,7 @@ class Consulta_Lancamentos extends Component {
     ano: "",
     mes: "",
     tipo: "",
+    descricao: "",
     lancamentos: [],
   };
 
@@ -20,12 +22,18 @@ class Consulta_Lancamentos extends Component {
   }
 
   buscar = () => {
+    if (!this.state.ano || !this.state.descricao) {
+      messages.mostrarErro(`O campo ano precisa estar preenchido!`);
+      return false;
+    }
+
     const usuarioLogado = LocalStorageService.obetItem("_usuario_logado");
 
     const lancamentoFiltro = {
       ano: this.state.ano,
       mes: this.state.mes,
       tipo: this.state.tipo,
+      descricao: this.state.descricao,
       usuario: usuarioLogado.id,
     };
 
@@ -40,66 +48,9 @@ class Consulta_Lancamentos extends Component {
   };
 
   render() {
-    const meses = [
-      {
-        label: "Selecione. . .",
-        value: "",
-      },
-      {
-        label: "Janeiro",
-        value: 1,
-      },
-      {
-        label: "Fevereiro",
-        value: 2,
-      },
-      {
-        label: "Março",
-        value: 3,
-      },
-      {
-        label: "Abril",
-        value: 4,
-      },
-      {
-        label: "Maio",
-        value: 5,
-      },
-      {
-        label: "Junho",
-        value: 6,
-      },
-      {
-        label: "Julho",
-        value: 7,
-      },
-      {
-        label: "Agosto",
-        value: 8,
-      },
-      {
-        label: "Setembro",
-        value: 9,
-      },
-      {
-        label: "Outubro",
-        value: 10,
-      },
-      {
-        label: "Novembro",
-        value: 11,
-      },
-      {
-        label: "Dezembro",
-        value: 12,
-      },
-    ];
+    const meses = this.service.obterListaMeses();
 
-    const tipos = [
-      { label: "Selecione . . .", value: "" },
-      { label: "Despesa", value: "DESPESA" },
-      { label: "Receita", value: "RECEITA" },
-    ];
+    const tipos = this.service.obterListaTipos();
 
     return (
       <div>
@@ -128,6 +79,19 @@ class Consulta_Lancamentos extends Component {
                     className="form-control"
                     value={this.state.mes}
                     onChange={(e) => this.setState({ mes: e.target.value })}
+                  />
+                </FormGroup>
+                <br />
+                <FormGroup label="Descricao: *" htmlFor="inputDescricao">
+                  <br />
+                  <br />
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputDescricao"
+                    value={this.state.descricao}
+                    onChange={(e) => this.setState({ descricao: e.target.value })}
+                    placeholder="Digite a Descrição"
                   />
                 </FormGroup>
                 <br />
