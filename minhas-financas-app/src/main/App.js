@@ -7,6 +7,9 @@ import CadastroUsuario from "../views/CadastroUsuario";
 import NavBar from "../components/NavBar";
 import "toastr/build/toastr.css";
 import "toastr/build/toastr.min.js";
+import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
+import "primereact/resources/primereact.min.css"; //core css
+import "primeicons/primeicons.css";
 
 export default class App extends Component {
   render() {
