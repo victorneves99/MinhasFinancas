@@ -8,6 +8,27 @@ import SelectMenu from "../../components/SelectMenu";
 import LancamentoService from "../../app/services/lancamentoService";
 
 class CadastroLancamentos extends Component {
+  state = {
+    id: null,
+    descricao: "",
+    valor: "",
+    mes: "",
+    ano: "",
+    tipo: "",
+    status: "",
+  };
+
+  handleChange = (event) => {
+    const value = event.target.value;
+    const name = event.target.name;
+
+    this.setState({ [name]: value });
+  };
+
+  submit = () => {
+    console.log(this.state);
+  };
+
   constructor() {
     super();
     this.service = new LancamentoService();
@@ -23,31 +44,66 @@ class CadastroLancamentos extends Component {
           <div className="row">
             <div className="col-md-12">
               <FormGroup id="inputDescicao" label="Descricao : *">
-                <input type="text" className="form-control" id="inputDescricao" />
+                <input
+                  type="text"
+                  name="descricao"
+                  onChange={this.handleChange}
+                  className="form-control"
+                  id="inputDescricao"
+                  value={this.state.descricao}
+                />
               </FormGroup>
             </div>
           </div>
           <div className="row">
             <div className="col-md-6">
               <FormGroup id="inputAno" label="Ano: *">
-                <input type="text" className="form-control" id="inputAno" />
+                <input
+                  type="text"
+                  value={this.state.ano}
+                  name="ano"
+                  onChange={this.handleChange}
+                  className="form-control"
+                  id="inputAno"
+                />
               </FormGroup>
             </div>
             <div className="col-md-6">
               <FormGroup id="inputMes" label="Mes: *">
-                <SelectMenu id="inputMes" lista={meses} className="form-control" />
+                <SelectMenu
+                  id="inputMes"
+                  name="mes"
+                  value={this.state.mes}
+                  onChange={this.handleChange}
+                  lista={meses}
+                  className="form-control"
+                />
               </FormGroup>
             </div>
           </div>
           <div className="row">
             <div className="col-md-4">
               <FormGroup id="inputValor" label="Valor: *">
-                <input type="text" id="inputValor" className="form-control" />
+                <input
+                  type="text"
+                  id="inputValor"
+                  name="valor"
+                  value={this.state.valor}
+                  onChange={this.handleChange}
+                  className="form-control"
+                />
               </FormGroup>
             </div>
             <div className="col-md-4">
               <FormGroup id="inputTipo" label="Tipo: *">
-                <SelectMenu id="inputTipo" lista={tipos} className="form-control" />
+                <SelectMenu
+                  id="inputTipo"
+                  name="tipo"
+                  value={this.state.tipo}
+                  onChange={this.handleChange}
+                  lista={tipos}
+                  className="form-control"
+                />
               </FormGroup>
             </div>
             <div className="col-md-4">
@@ -58,7 +114,9 @@ class CadastroLancamentos extends Component {
           </div>
           <div className="row  ">
             <div className="col-md-8 mt-5 border ">
-              <button className="btn btn-success">Salvar</button>
+              <button onClick={this.submit} className="btn btn-success">
+                Salvar
+              </button>
               <button className="btn btn-danger">Cancelar</button>
             </div>
           </div>
